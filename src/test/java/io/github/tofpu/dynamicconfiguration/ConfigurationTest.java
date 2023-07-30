@@ -69,9 +69,12 @@ public class ConfigurationTest {
             .setInt("id", 123)
             .getInt("id", -1));
 
+        config.set("nested.with.periods", true);
+
         Assertions.assertEquals("hi!", config.path("hello").getString("friend", null));
         Assertions.assertEquals(123, config.path("hello").getInt("id", -1));
         Assertions.assertNull(config.path("hello").getString("unknown", null));
+        Assertions.assertTrue(config.getAs(Boolean.class, "nested.with.periods", null));
     }
 
     @Test
