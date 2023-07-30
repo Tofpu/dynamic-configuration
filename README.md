@@ -10,17 +10,36 @@ A library that simplify the creation of multiple configuration types.
   
   ## Gradle DSL
   
-  ```
-    implementation("com.github.Tofpu:dynamic-configuration:latest-version-here")
+  ```gradle
+    repositories {
+      maven("https://jitpack.io")
+      // ... other
+    }
+
+    dependencies {
+      implementation("com.github.Tofpu:dynamic-configuration:latest-version-here")
+      // ... other
+    }
   ```
   
   ## Maven
-  ```
-  	<dependency>
-  	    <groupId>com.github.Tofpu</groupId>
-  	    <artifactId>dynamic-configuration</artifactId>
-  	    <version>latest-version-here</version>
-  	</dependency>
+  ```xml
+	<repositories>
+	  <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+	  </repository>
+    <!-- other -->
+	</repositories>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.github.Tofpu</groupId>
+      <artifactId>dynamic-configuration</artifactId>
+      <version>latest-version-here</version>
+    </dependency>
+    <!-- other -->
+  </dependencies>
   ```
   </details>
 
