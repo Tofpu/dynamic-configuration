@@ -1,6 +1,7 @@
 plugins {
     id("java")
     id("com.github.johnrengelman.shadow") version "8.1.1"
+    `maven-publish`
 }
 
 group = "io.github.tofpu"
@@ -15,6 +16,16 @@ dependencies {
     implementation("org.yaml:snakeyaml:2.0")
     testImplementation(platform("org.junit:junit-bom:5.9.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            artifactId = "dynamic-configuration"
+
+            from(components["java"])
+        }
+    }
 }
 
 tasks {
