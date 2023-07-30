@@ -21,6 +21,7 @@ dependencies {
 tasks {
     shadowJar {
         archiveClassifier.set("")
+        relocate("org.yaml:snakeyaml:2.0", "io.github.tofpu.dynamicconfiguration.libs")
     }
 
     test {
