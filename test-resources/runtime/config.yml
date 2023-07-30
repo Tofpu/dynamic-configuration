@@ -1,0 +1,21 @@
+daddy: tofpu
+mommy: also tofpu
+friendly.friend: and also tofpu
+index: 0
+test: 'yes'
+hello:
+  friend: hi!
+  id: 123
+department:
+  creationDate: Wed Jul 26 17:03:42 EEST 2023
+  latestUpdate: Sat Jan 07 16:03:42 EET 2023
+  list:
+    New York:
+      employees_size: 10
+      director: Tofpu
+      id: 1
+    New Mexico:
+      employees_size: 20
+      director: AnotherTofpu
+      id: 2
+  count: 20
