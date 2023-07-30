@@ -4,7 +4,6 @@ package io.github.tofpu.dynamicconfiguration.impl.node;
 import io.github.tofpu.dynamicconfiguration.Configuration;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -24,8 +23,8 @@ public class Node {
         System.arraycopy(paths, 0, newPath, 0, paths.length);
         newPath[this.paths.length] = key;
 
-        System.out.println("old path: " + Arrays.toString(paths));
-        System.out.println("new path: " + Arrays.toString(newPath));
+        // System.out.println("old path: " + Arrays.toString(paths));
+        // System.out.println("new path: " + Arrays.toString(newPath));
 
         return new NodeConfiguration(delegate, newPath);
     }
@@ -35,20 +34,20 @@ public class Node {
 
         System.arraycopy(paths, 0, newPath, 0, paths.length - 1);
 
-        System.out.println("old path: " + Arrays.toString(paths));
-        System.out.println("new path: " + Arrays.toString(newPath));
+        // System.out.println("old path: " + Arrays.toString(paths));
+        // System.out.println("new path: " + Arrays.toString(newPath));
 
         return new NodeConfiguration(delegate, newPath);
     }
 
     public void set(String key, Object obj) {
         Result result = getResult();
-        System.out.println("before: nestMap: " + result.nestMap());
+        // System.out.println("before: nestMap: " + result.nestMap());
 
         result.nestMap().put(key, obj);
-        System.out.println("after: nestMap: " + result.nestMap());
+        // System.out.println("after: nestMap: " + result.nestMap());
 
-        System.out.println("rootMap: " + result.rootMap());
+        // System.out.println("rootMap: " + result.rootMap());
         delegate.set(paths[0], result.rootMap());
     }
 
