@@ -1,5 +1,6 @@
 plugins {
     id("java")
+    id("com.github.johnrengelman.shadow") version "8.1.1"
 }
 
 group = "io.github.tofpu"
@@ -17,6 +18,12 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter")
 }
 
-tasks.test {
-    useJUnitPlatform()
+tasks {
+    shadowJar {
+        archiveClassifier.set("")
+    }
+
+    test {
+        useJUnitPlatform()
+    }
 }
