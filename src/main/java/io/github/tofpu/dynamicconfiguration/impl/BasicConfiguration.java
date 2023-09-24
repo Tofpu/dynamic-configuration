@@ -51,9 +51,9 @@ public class BasicConfiguration {
         }
 
         Map<String, Object> loadedMap;
-        try {
-            loadedMap = this.yaml.load(new FileInputStream(fromFile));
-        } catch (FileNotFoundException e) {
+        try (InputStream inputStream = Files.newInputStream(fromFile.toPath())) {
+            loadedMap = this.yaml.load(inputStream);
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
         if (loadedMap != null && loadedMap.size() != 0) {
