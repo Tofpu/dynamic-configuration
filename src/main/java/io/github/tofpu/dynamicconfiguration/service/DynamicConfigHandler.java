@@ -45,9 +45,7 @@ public class DynamicConfigHandler {
 
     public void unload() {
         if (!loaded) return;
-        this.configurationMap.forEach((type, configuration) -> {
-            configuration.save(new File(pluginDirectory, type.identifier() + ".yml"));
-        });
+        this.configurationMap.keySet().forEach(this::save);
         this.loaded = false;
     }
 
@@ -55,5 +53,12 @@ public class DynamicConfigHandler {
         requireState(this.configurationMap.containsKey(type), "Unknown %s configuration type",
             type.identifier());
         return this.configurationMap.get(type);
+    }
+
+    public void save(final ConfigType type) {
+        requireState(this.configurationMap.containsKey(type), "Unknown %s configuration type",
+                type.identifier());
+        LoadableConfiguration configuration = this.configurationMap.get(type);
+        configuration.save(new File(pluginDirectory, type.identifier() + ".yml"));
     }
 }
