@@ -70,8 +70,8 @@ public class BasicConfiguration {
     }
 
     public void save(final File toFile) {
-        try {
-            yaml.dump(objectMap, new PrintWriter(toFile));
+        try (PrintWriter writer = new PrintWriter(toFile)) {
+            yaml.dump(objectMap, writer);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
