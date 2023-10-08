@@ -70,9 +70,9 @@ public class BasicConfiguration {
     }
 
     public void save(final File toFile) {
-        try (PrintWriter writer = new PrintWriter(toFile)) {
+        try (PrintWriter writer = new PrintWriter(toFile, "utf-8")) {
             yaml.dump(objectMap, writer);
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException | UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
     }
