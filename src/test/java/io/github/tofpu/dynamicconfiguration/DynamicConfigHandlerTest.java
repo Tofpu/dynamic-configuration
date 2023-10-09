@@ -9,11 +9,9 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class DynamicConfigHandlerTest {
     private static final File DIRECTORY = new File("test-resources/runtime/dynamicconfighandler");
@@ -22,7 +20,10 @@ public class DynamicConfigHandlerTest {
     @AfterEach
     void tearDown() throws IOException {
         configHandler.unload();
-        for (File file : Objects.requireNonNull(DIRECTORY.listFiles())) {
+
+        File[] files = DIRECTORY.listFiles();
+        if (files == null) return;
+        for (File file : files) {
             Files.delete(file.toPath());
         }
         Files.deleteIfExists(DIRECTORY.toPath());
@@ -49,6 +50,17 @@ public class DynamicConfigHandlerTest {
         List<String> dataList = configuration.data().entrySet().stream().map(entry -> entry.getKey() + ": " + entry.getValue()).collect(Collectors.toList());
         List<String> allLines = Files.readAllLines(new File(DIRECTORY, CustomConfigTypes.CONFIG.identifier() + ".yml").toPath());
         assertNotEquals(dataList, allLines);
+    }
+
+    @Test
+    void load_individual_config_type() {
+        configHandler.load(CustomConfigTypes.CONFIG);
+        assertNotNull(configHandler.on(CustomConfigTypes.CONFIG));
+    }
+
+    @Test
+    void retrieve_config_without_loading_individual_config_type() {
+        assertThrows(IllegalStateException.class, () -> configHandler.on(CustomConfigTypes.CONFIG));
     }
 
     enum CustomConfigTypes implements ConfigType {

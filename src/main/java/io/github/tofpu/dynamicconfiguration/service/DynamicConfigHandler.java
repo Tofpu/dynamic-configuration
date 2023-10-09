@@ -30,13 +30,13 @@ public class DynamicConfigHandler {
         requireArgument(configTypes != null && configTypes.size() > 0, "At-least a singular configuration type must be provided.");
 
         this.loaded = true;
+        configTypes.forEach(this::load);
+    }
 
-        for (ConfigType value : configTypes) {
-            this.configurationMap.put(value, new AdvancedConfiguration());
-        }
-        this.configurationMap.forEach((type, configuration) -> {
-            configuration.load(new File(pluginDirectory, type.identifier() + ".yml"));
-        });
+    public void load(ConfigType configType) {
+        AdvancedConfiguration configuration = new AdvancedConfiguration();
+        this.configurationMap.put(configType, configuration);
+        configuration.load(new File(pluginDirectory, configType.identifier() + ".yml"));
     }
 
     public void load(final ConfigType[] configTypes) {
